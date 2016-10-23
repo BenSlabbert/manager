@@ -12,7 +12,7 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
-    compile group : 'org.hibernate', name : 'hibernate-core', version : '5.2.3.Final'
+    compile 'org.hibernate:hibernate-entitymanager:4.3.11.Final'
     compile 'org.codehaus.groovy:groovy-all:2.4.6'
     compile 'javax.json:javax.json-api:1.0'
 

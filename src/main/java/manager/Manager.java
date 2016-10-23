@@ -19,9 +19,9 @@ public class Manager {
 
         PersonImpl personImpl = new PersonImpl();
         
-        person = personImpl.getPersonById(1L);
+        person = personImpl.getPersonById(1);
 
-        System.out.println(person.toString());
+        System.out.println(person.getId() + " " + person.getName() + " " + person.getSurname());
         
     }
 }

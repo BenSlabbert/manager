@@ -9,7 +9,7 @@ import java.util.List;
 public interface PersonDAO {
     
     
-    Person getPersonById(long id);
+    Person getPersonById(Integer id);
     
     List<Person> searchByFirstName(String name);
     

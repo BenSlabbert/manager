@@ -12,10 +12,10 @@ import java.util.List;
 public class PersonImpl implements PersonDAO {
 
     private EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("f1");
+            Persistence.createEntityManagerFactory("myDb");
     
     @Override
-    public Person getPersonById(long id) {
+    public Person getPersonById(Integer id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Person person = em.find(Person.class, id);

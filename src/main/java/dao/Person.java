@@ -7,33 +7,25 @@ import javax.persistence.*;
  * Created by benjamin on 2016/10/23.
  */
 @Entity
-@Table(name = "PERSON")
+@Table(name = "person")
 public class Person {
     
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     
-    @Column
     private String name;
-    
-    @Column
     private String surname;
     
     public Person() {
     }
     
-    public Person(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
-    
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     

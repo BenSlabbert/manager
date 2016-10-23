@@ -29,3 +29,5 @@ out
 *.iws
 
 src/test/
+.gradle/
+out/
