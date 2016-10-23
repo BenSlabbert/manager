@@ -13,3 +13,19 @@ hs_err_pid*
 
 # ignore intelliJ files
 .idea/
+
+# anything else
+build
+bin
+classes
+.idea
+.gradle
+.project
+.classpath
+.settings
+out
+*.iml
+*.ipr
+*.iws
+
+src/test/

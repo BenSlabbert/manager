@@ -11,5 +11,11 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+
     compile group : 'org.hibernate', name : 'hibernate-core', version : '5.2.3.Final'
+    compile 'org.codehaus.groovy:groovy-all:2.4.6'
+    compile 'javax.json:javax.json-api:1.0'
+
+    runtime 'org.glassfish:javax.json:1.0.4'
+    runtime 'mysql:mysql-connector-java:5.1.38'
 }
