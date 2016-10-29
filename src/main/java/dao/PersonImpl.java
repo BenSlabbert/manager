@@ -28,7 +28,7 @@ public class PersonImpl implements PersonDAO {
     
     @Override
     public List<Person> searchByFirstName(String searchFirstName) {
-
+        
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Query q = em.createQuery("select p from Person p where p.name = :name");
@@ -38,7 +38,7 @@ public class PersonImpl implements PersonDAO {
         em.close();
         return person;
     }
-
+    
     @Override
     public List<Person> searchByLastName(String searchLastName) {
         EntityManager em = emf.createEntityManager();
@@ -49,5 +49,24 @@ public class PersonImpl implements PersonDAO {
         em.getTransaction().commit();
         em.close();
         return person;
+    }
+    
+    @Override
+    public Integer save(Person p) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(p);
+        em.getTransaction().commit();
+        em.close();
+        return p.getId();
+    }
+    
+    @Override
+    public void delete(Person p) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.find(Person.class, p.getId()));
+        em.getTransaction().commit();
+        em.close();
     }
 }

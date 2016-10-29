@@ -14,4 +14,8 @@ public interface PersonDAO {
     List<Person> searchByFirstName(String name);
     
     List<Person> searchByLastName(String name);
+
+    Integer save(Person p);
+
+    void delete(Person p);
 }

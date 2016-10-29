@@ -36,5 +36,9 @@ public class Manager {
         for (Person p : personList) {
             System.out.printf("surname : %s%n", p.getSurname());
         }
+
+        person = personList.get(2);
+        personImpl.delete(person);
+
     }
 }
