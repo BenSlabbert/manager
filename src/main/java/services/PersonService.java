@@ -22,5 +22,10 @@ public class PersonService {
     public Person getPersonById(Integer id) {
         return repository.getPersonById(id);
     }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public Integer savePerson(Person p) {
+        return repository.save(p);
+    }
     
 }
