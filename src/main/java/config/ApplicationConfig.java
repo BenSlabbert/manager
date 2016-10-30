@@ -1,11 +1,10 @@
-package com.manager.config;
+package config;
 
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import com.manager.entity.Person;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -23,23 +22,37 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import entity.Person;
+import repository.PersonRepositoryImpl;
+import services.PersonService;
+
 
 /**
  * Created by benjamin on 2016/10/30.
  */
 @Configuration
-@ComponentScan(basePackages = "com.manager")
+@ComponentScan()
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
 public class ApplicationConfig {
     
     @Autowired
     private Environment env;
+    
+    @Bean
+    public Person person() {
+        return new Person();
+    }
 
-   @Bean
-   public Person person(){
-       return new Person();
-   }
+    @Bean
+    public PersonRepositoryImpl personRepository(){
+        return new PersonRepositoryImpl();
+    }
+
+    @Bean
+    public PersonService personService(){
+        return new PersonService();
+    }
     
     @Bean
     public DataSource dataSource() {
@@ -47,7 +60,7 @@ public class ApplicationConfig {
         dataSource.setDriverClassName(env.getProperty("db.driver"));
         dataSource.setUrl(env.getProperty("db.url"));
         dataSource.setUsername(env.getProperty("db.user"));
-        dataSource.setPassword(env.getProperty("db.pass"));
+        dataSource.setDefaultAutoCommit(true);
         return dataSource;
     }
     
@@ -69,7 +82,7 @@ public class ApplicationConfig {
         
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("java");
+        emf.setPackagesToScan("entity");
         emf.setJpaVendorAdapter(jpaVendorAdapter);
         emf.setJpaProperties(props);
         

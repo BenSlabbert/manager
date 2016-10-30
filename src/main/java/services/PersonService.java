@@ -1,7 +1,7 @@
-package com.manager.services;
+package services;
 
-import com.manager.entity.Person;
-import com.manager.repository.PersonRepository;
+import entity.Person;
+import repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,7 +20,7 @@ public class PersonService {
 
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Person getPersonById(Integer id) {
-        return repository.getPersonById(1);
+        return repository.getPersonById(id);
     }
     
 }

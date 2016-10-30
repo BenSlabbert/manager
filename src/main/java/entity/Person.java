@@ -1,17 +1,13 @@
-package com.manager.entity;
+package entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 /**
  * Created by benjamin on 2016/10/23.
  */
 @Entity
+@Table(name = "person")
 public class Person {
     
     
@@ -52,6 +48,13 @@ public class Person {
     
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    @Override
+    public String toString(){
+        return "id : " + getId()
+                + " firstName : " + getName()
+                + "lastName : " + getSurname();
     }
     
 }

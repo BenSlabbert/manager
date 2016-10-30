@@ -1,8 +1,8 @@
-package com.manager.repository;
-
-import com.manager.entity.Person;
+package repository;
 
 import java.util.List;
+
+import entity.Person;
 
 
 /**
@@ -10,14 +10,15 @@ import java.util.List;
  */
 public interface PersonRepository {
     
-    
+    List<Person> getAll();
+
     Person getPersonById(Integer id);
     
     List<Person> searchByFirstName(String name);
     
     List<Person> searchByLastName(String name);
-
+    
     Integer save(Person p);
-
+    
     void delete(Person p);
 }

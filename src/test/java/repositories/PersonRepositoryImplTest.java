@@ -3,16 +3,19 @@ package repositories;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import com.manager.config.ApplicationConfig;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.manager.entity.Person;
-import com.manager.repository.PersonRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import config.ApplicationConfig;
+import entity.Person;
+import repository.PersonRepository;
 
 
 /**
@@ -26,9 +29,49 @@ public class PersonRepositoryImplTest {
     @Autowired
     private PersonRepository repository;
     
+    @Autowired
+    Person person;
+    
     @Test
-    public void testGetAccounts() throws Exception {
-        Person person = repository.getPersonById(1);
-        assertThat(person.getId(), is(1));
+    public void testGetPersonById() throws Exception {
+        person = repository.getPersonById(1);
+        Person p = new Person("dad", "slab");
+        p.setId(1);
+        Assert.assertEquals(p.toString(), person.toString());
+    }
+    
+    @Test
+    public void testGetPersonByFirstName() throws Exception {
+        List<Person> person = repository.searchByFirstName("ben");
+        for (Person p : person) {
+            Assert.assertEquals("ben", p.getName());
+        }
+    }
+    
+    @Test
+    public void testGetPersonByLastName() throws Exception {
+        List<Person> person = repository.searchByLastName("slab");
+        for (Person p : person) {
+            Assert.assertEquals("slab", p.getSurname());
+        }
+    }
+    
+    @Test
+    public void testSavePerson() throws Exception {
+
+        Person p = new Person("anne", "slab");
+        Integer newId = repository.save(p);
+        p.setId(newId);
+        person = repository.getPersonById(newId);
+        Assert.assertEquals(p.toString(), person.toString());
+    }
+    
+    @Test
+    public void testDeletePerson() throws Exception {
+        person = repository.getPersonById(1);
+        repository.delete(person);
+        Person p = repository.getPersonById(1);
+
+        Assert.assertTrue(p == null);
     }
 }

@@ -1,4 +1,4 @@
-package com.manager.repository;
+package repository;
 
 import java.util.List;
 
@@ -6,8 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.manager.entity.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import entity.Person;
 
 
 /**
@@ -18,16 +20,26 @@ public class PersonRepositoryImpl implements PersonRepository {
     
     @PersistenceContext
     private EntityManager entityManager;
-    
+
+    @Autowired
+    Person person;
+
+    @Override
+    public List<Person> getAll() {
+        Query q = entityManager.createQuery("select p from Person p");
+        List<Person> person = q.getResultList();
+        return person;
+    }
+
     @Override
     public Person getPersonById(Integer id) {
-        Person person = entityManager.find(Person.class, id);
-        return person;
+        Person p =  entityManager.find(Person.class, id);
+        return p;
     }
     
     @Override
     public List<Person> searchByFirstName(String searchFirstName) {
-        
+
         Query q = entityManager.createQuery("select p from Person p where p.name = :name");
         q.setParameter("name", searchFirstName);
         List<Person> person = q.getResultList();
