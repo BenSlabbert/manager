@@ -19,6 +19,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -52,6 +53,11 @@ public class ApplicationConfig {
     @Bean
     public PersonService personService(){
         return new PersonService();
+    }
+
+    @Bean
+    public ShaPasswordEncoder shaPasswordEncoder(){
+        return new ShaPasswordEncoder(256);
     }
     
     @Bean
