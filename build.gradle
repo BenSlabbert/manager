@@ -1,4 +1,4 @@
-group 'com.manager'
+group 'com.manager.services'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

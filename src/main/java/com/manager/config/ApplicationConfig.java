@@ -1,10 +1,18 @@
 package com.manager.config;
 
+import java.util.Properties;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
 import com.manager.entity.Person;
-import com.manager.repository.PersonRepository;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -14,37 +22,25 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-import java.util.Properties;
 
 /**
  * Created by benjamin on 2016/10/30.
  */
 @Configuration
-@ComponentScan(basePackages = "java")
+@ComponentScan(basePackages = "com.manager")
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
 public class ApplicationConfig {
-
+    
     @Autowired
     private Environment env;
 
-    @Bean
-    public Person person(){
-        return new Person();
-    }
-
-    @Bean
-    public PersonRepository personRepository(){
-        return new PersonRepository();
-    }
-
+   @Bean
+   public Person person(){
+       return new Person();
+   }
+    
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
@@ -54,7 +50,7 @@ public class ApplicationConfig {
         dataSource.setPassword(env.getProperty("db.pass"));
         return dataSource;
     }
-
+    
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
@@ -63,32 +59,31 @@ public class ApplicationConfig {
         adapter.setDatabase(Database.MYSQL);
         return adapter;
     }
-
+    
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
-
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+            JpaVendorAdapter jpaVendorAdapter) {
+        
         Properties props = new Properties();
         props.setProperty("hibernate.format_sql", String.valueOf(true));
-
-        LocalContainerEntityManagerFactoryBean emf =
-                new LocalContainerEntityManagerFactoryBean();
+        
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
         emf.setPackagesToScan("java");
         emf.setJpaVendorAdapter(jpaVendorAdapter);
         emf.setJpaProperties(props);
-
+        
         return emf;
     }
-
+    
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
-
+    
     @Bean
     public BeanPostProcessor persistenceTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
+    
 }

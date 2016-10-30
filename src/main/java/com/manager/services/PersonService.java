@@ -2,37 +2,25 @@ package com.manager.services;
 
 import com.manager.entity.Person;
 import com.manager.repository.PersonRepository;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.manager.config.ApplicationConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
  * Created by benjamin on 2016/10/23.
  */
+@Service
+@Transactional
 public class PersonService {
 
-    public PersonService() {
+    @Autowired
+    private PersonRepository repository;
+
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Person getPersonById(Integer id) {
+        return repository.getPersonById(1);
     }
-
-    public static void main(String[] args) {
-
-        ApplicationContext context =
-                new AnnotationConfigApplicationContext(ApplicationConfig.class, ApplicationConfig.class);
-
-        Person person = context.getBean(Person.class);
-
-        PersonRepository personImpl = context.getBean(PersonRepository.class);
-
-        for (String name : context.getBeanDefinitionNames()) {
-            System.out.println(name);
-        }
-
-        person = personImpl.getPersonById(1);
-
-        System.out.println(person.toString());
-
-
-    }
+    
 }
