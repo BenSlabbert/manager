@@ -5,9 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import config.ApplicationConfig;
 import entity.Person;
-import org.springframework.util.DigestUtils;
 import services.PersonService;
-import sun.security.provider.SHA;
 
 
 /**
