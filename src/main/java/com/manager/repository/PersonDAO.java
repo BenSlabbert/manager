@@ -1,6 +1,6 @@
-package repository;
+package com.manager.repository;
 
-import entity.Person;
+import com.manager.entity.Person;
 
 import java.util.List;
 

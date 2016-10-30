@@ -1,11 +1,11 @@
-package manager;
+package com.manager.services;
 
-import entity.Person;
-import repository.PersonRepository;
+import com.manager.entity.Person;
+import com.manager.repository.PersonRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import config.ApplicationConfig;
+import com.manager.config.ApplicationConfig;
 
 
 /**

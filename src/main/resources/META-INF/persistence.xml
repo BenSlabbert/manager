@@ -7,7 +7,7 @@
 
     <persistence-unit name="myDb" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>entity.Person</class>
+        <class>com.manager.entity.Person</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/f1"/>
             <property name="javax.persistence.jdbc.user" value="root"/>

@@ -1,7 +1,7 @@
-package config;
+package com.manager.config;
 
-import entity.Person;
-import repository.PersonRepository;
+import com.manager.entity.Person;
+import com.manager.repository.PersonRepository;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
