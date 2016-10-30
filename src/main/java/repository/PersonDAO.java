@@ -1,4 +1,6 @@
-package dao;
+package repository;
+
+import entity.Person;
 
 import java.util.List;
 

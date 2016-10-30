@@ -1,13 +1,15 @@
-package dao;
+package entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 /**
  * Created by benjamin on 2016/10/23.
  */
 @Entity
-@Table(name = "person")
 public class Person {
     
     
@@ -20,8 +22,8 @@ public class Person {
     
     public Person() {
     }
-
-    public Person(String name, String surname){
+    
+    public Person(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
