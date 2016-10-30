@@ -11,7 +11,7 @@ import entity.Person;
 public interface PersonRepository {
     
     List<Person> getAll();
-
+    
     Person getPersonById(Integer id);
     
     List<Person> searchByFirstName(String name);

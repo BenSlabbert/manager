@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import entity.Person;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -20,26 +21,26 @@ public class PersonRepositoryImpl implements PersonRepository {
     
     @PersistenceContext
     private EntityManager entityManager;
-
+    
     @Autowired
     Person person;
-
+    
     @Override
     public List<Person> getAll() {
         Query q = entityManager.createQuery("select p from Person p");
         List<Person> person = q.getResultList();
         return person;
     }
-
+    
     @Override
     public Person getPersonById(Integer id) {
-        Person p =  entityManager.find(Person.class, id);
+        Person p = entityManager.find(Person.class, id);
         return p;
     }
     
     @Override
     public List<Person> searchByFirstName(String searchFirstName) {
-
+        
         Query q = entityManager.createQuery("select p from Person p where p.name = :name");
         q.setParameter("name", searchFirstName);
         List<Person> person = q.getResultList();
@@ -55,12 +56,14 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
     
     @Override
+    @Transactional(readOnly = false)
     public Integer save(Person p) {
         entityManager.persist(p);
         return p.getId();
     }
     
     @Override
+    @Transactional(readOnly = false)
     public void delete(Person p) {
         entityManager.remove(entityManager.find(Person.class, p.getId()));
     }

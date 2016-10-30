@@ -1,8 +1,5 @@
 package repositories;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import java.util.List;
 
 import org.junit.Assert;
@@ -36,7 +33,7 @@ public class PersonRepositoryImplTest {
     public void testGetPersonById() throws Exception {
         person = repository.getPersonById(1);
         Person p = new Person("dad", "slab");
-        p.setId(1);
+        p.setId(9);
         Assert.assertEquals(p.toString(), person.toString());
     }
     
@@ -58,7 +55,7 @@ public class PersonRepositoryImplTest {
     
     @Test
     public void testSavePerson() throws Exception {
-
+        
         Person p = new Person("anne", "slab");
         Integer newId = repository.save(p);
         p.setId(newId);
@@ -71,7 +68,7 @@ public class PersonRepositoryImplTest {
         person = repository.getPersonById(1);
         repository.delete(person);
         Person p = repository.getPersonById(1);
-
+        
         Assert.assertTrue(p == null);
     }
 }
