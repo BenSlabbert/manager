@@ -23,7 +23,7 @@ public class PersonService {
         return repository.getPersonById(id);
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = false, propagation = Propagation.SUPPORTS)
     public Integer savePerson(Person p) {
         return repository.save(p);
     }
